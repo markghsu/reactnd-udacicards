@@ -4,7 +4,7 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native'
 export default class DeckView extends Component {
 
 	render() {
-		const {title,questions} = this.props
+		const {title,questions} = this.props.navigation.state.params
 		return (
 			<View>
 				<Text style={styles.title}>{title}</Text>
