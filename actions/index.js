@@ -1,10 +1,10 @@
 export const ADD_DECK = 'ADD_DECK'
 export const ADD_CARD = 'ADD_CARD'
 
-export function addDeck (deck) {
+export function addDeck (name) {
 	return{
 		type: ADD_DECK,
-		deck,
+		name: name,
 	}
 }
 

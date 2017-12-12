@@ -3,6 +3,9 @@ import { StyleSheet, Text, View, StatusBar } from 'react-native'
 import DeckList from './components/DeckList'
 import {white,orange} from './utils/colors'
 import {Constants} from 'expo'
+import {createStore} from 'redux'
+import {Provider} from 'react-redux'
+import reducer from './reducers'
 import {TabNavigator,StackNavigator} from 'react-navigation'
 import DeckView from './components/DeckView'
 import AddCard from './components/AddCard'
@@ -11,10 +14,12 @@ import AddDeck from './components/AddDeck'
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <UStatusBar backgroundColor={orange} barStyle='light-content'/>
-        <Stack />
-      </View>
+      <Provider store={createStore(reducer,{decks:{}},window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())}>
+        <View style={styles.container}>
+          <UStatusBar backgroundColor={orange} barStyle='light-content'/>
+          <Stack />
+        </View>
+      </Provider>
     );
   }
 }
@@ -51,6 +56,12 @@ const Stack = StackNavigator({
     screen: Tabs
   },
   DeckView: {
+    screen: DeckView
+  },
+  AddCard: {
+    screen: AddCard
+  },
+  QuizView: {
     screen: DeckView
   }
 })

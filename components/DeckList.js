@@ -1,43 +1,20 @@
 import React, {Component} from 'react'
 import {View, ScrollView, Text, StyleSheet, Platform, TouchableOpacity} from 'react-native'
+import {connect} from 'react-redux'
 
-export default class DeckList extends Component {
+class DeckList extends Component {
 	state = {
-	  	decks:{
-	  	React: {
-	  	    title: 'React',
-	  	    questions: [
-	  	      {
-	  	        question: 'What is React?',
-	  	        answer: 'A library for managing user interfaces'
-	  	      },
-	  	      {
-	  	        question: 'Where do you make Ajax requests in React?',
-	  	        answer: 'The componentDidMount lifecycle event'
-	  	      }
-	  	    ]
-	  	  },
-	  	  JavaScript: {
-	  	    title: 'JavaScript',
-	  	    questions: [
-	  	      {
-	  	        question: 'What is a closure?',
-	  	        answer: 'The combination of a function and the lexical environment within which that function was declared.'
-	  	      }
-	  	    ]
-	  	  }
-	  	}
 	}
-	viewDeck = (deck) => this.props.navigation.navigate('DeckView',deck)
+	viewDeck = (deck) => this.props.navigation.navigate('DeckView',{id:deck})
 	render() {
 		return (
 			<View>
 				<Text>DeckList</Text>
 				<View style={styles.container}>
-					{Object.keys(this.state.decks).map((keyName,keyIndex)=>{
-						const deck = this.state.decks[keyName]
+					{Object.keys(this.props.decks).map((keyName,keyIndex)=>{
+						const deck = this.props.decks[keyName]
 						
-						return (<TouchableOpacity key={keyName} onPress={()=>(this.viewDeck(deck))}>
+						return (<TouchableOpacity key={keyName} onPress={()=>(this.viewDeck(keyName))}>
 							<View style={[{borderWidth:1}]}>
 								<Text style={styles.title}>{deck.title}</Text>
 								<Text style={styles.subheader}>{deck.questions.length} card{deck.questions.length!==1?"s":""}</Text>
@@ -65,3 +42,12 @@ const styles = StyleSheet.create({
   	textAlign: 'center'
   }
 });
+
+
+function mapStateToProps(state){
+
+	return {
+		decks: state["decks"]
+	}
+}
+export default connect(mapStateToProps)(DeckList)

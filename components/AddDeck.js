@@ -1,15 +1,26 @@
 import React, {Component} from 'react'
 import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native'
 import {lightPurp, white} from '../utils/colors'
+import {addDeck} from '../actions'
+import {connect} from 'react-redux'
 
-export default class AddDeck extends Component {
+class AddDeck extends Component {
 	state = {
 		input:""
 	}
 	submit=()=>{
+		deck = this.state.input
 		//Update store
+		this.props.dispatch(addDeck(deck))
 		//Update in DB
+
+		//Clear Input
+		this.setState(()=>({
+			input:""
+		}))
 		//Navigate to Deck
+		this.props.navigation.navigate('DeckView',{id:deck})
+		//DOESN'T WORK BECAUSE deck NEEDS TO BE A FULL OBJECT, NOT JUST AN ID.
 	}
 	changeInput= (input) => {
 		this.setState(()=>({
@@ -63,3 +74,5 @@ const styles = StyleSheet.create({
 		backgroundColor: 'black',
 	}
 });
+
+export default connect()(AddDeck)
