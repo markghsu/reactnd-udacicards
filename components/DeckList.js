@@ -1,8 +1,16 @@
 import React, {Component} from 'react'
 import {View, ScrollView, Text, StyleSheet, Platform, TouchableOpacity} from 'react-native'
 import {connect} from 'react-redux'
+import {receiveDecks} from '../actions'
+import * as API from '../utils/api'
 
 class DeckList extends Component {
+	componentDidMount() {
+		API.getDecks().then((data)=>{
+			this.props.dispatch(receiveDecks(data))
+		}).catch((error)=>{
+		})
+	}
 	state = {
 	}
 	viewDeck = (deck) => this.props.navigation.navigate('DeckView',{id:deck})

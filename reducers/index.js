@@ -1,6 +1,6 @@
-import { ADD_DECK, ADD_CARD } from '../actions'
+import { ADD_DECK, ADD_CARD, RECEIVE_DECKS } from '../actions'
 
-function reducer (state = {}, action) {
+function reducer (state = {decks:[]}, action) {
   switch (action.type) {
 		case ADD_DECK :
       decks = typeof state.decks === 'undefined'?[]:state.decks
@@ -18,6 +18,11 @@ function reducer (state = {}, action) {
 		case ADD_CARD :
       return {
         ...state
+      }
+    case RECEIVE_DECKS:
+      return {
+        ...state,
+        decks: action.decks
       }
 		default:
 			return state

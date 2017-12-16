@@ -12,9 +12,16 @@ import AddCard from './components/AddCard'
 import AddDeck from './components/AddDeck'
 
 export default class App extends React.Component {
+  // componentDidMount() {
+  //   API.getDecks().then((data)=>{
+  //     //CAN'T FILL REDUX HERE BECAUSE OUR COMPONENT CAN'T CONNECT TO AN UNCREATED STORE
+  //   }).catch((error)=>{
+  //   })
+  // }
+  //@TODO: USE REDUX-PERSIST
   render() {
     return (
-      <Provider store={createStore(reducer,{decks:{}},window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())}>
+      <Provider store={createStore(reducer,{decks:{}})}>
         <View style={styles.container}>
           <UStatusBar backgroundColor={orange} barStyle='light-content'/>
           <Stack />
