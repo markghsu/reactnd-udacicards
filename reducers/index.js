@@ -17,7 +17,17 @@ function reducer (state = {decks:[]}, action) {
       }
 		case ADD_CARD :
       return {
-        ...state
+        ...state,
+        decks:{
+          ...state.decks,
+          [action.deck]:{
+            ...state.decks[action.deck],
+            questions:[
+              ...state.decks[action.deck]['questions'],
+              action.card
+            ]
+          }
+        }
       }
     case RECEIVE_DECKS:
       return {

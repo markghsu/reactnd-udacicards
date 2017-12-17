@@ -12,7 +12,7 @@ class DeckView extends Component {
 			<View>
 				<Text style={styles.title}>{title}</Text>
 				<Text style={styles.subheader}>{questions.length} card{questions.length!==1?"s":""}</Text>
-				<TouchableOpacity onPress={()=>this.props.navigation.navigate('AddCard',title)}>
+				<TouchableOpacity onPress={()=>this.props.navigation.navigate('AddCard',{title})}>
 					<Text>Add Card</Text>
 				</TouchableOpacity>
 				<TouchableOpacity>

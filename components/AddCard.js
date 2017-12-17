@@ -1,16 +1,23 @@
 import React, {Component} from 'react'
 import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native'
 import {lightPurp, white} from '../utils/colors'
+import {connect} from 'react-redux'
+import {addCard} from '../actions'
+import {addCardToDeck} from '../utils/api'
 
-export default class AddCard extends Component {
+class AddCard extends Component {
 	state = {
 		question:"",
 		answer:""
 	}
 	submit=()=>{
+		const {question,answer} = this.state
 		//Update store
+		this.props.dispatch(addCard(question,answer,this.props.navigation.state.params.title))
 		//Update in DB
+		addCardToDeck(this.props.navigation.state.params.title,{question, answer})
 		//Navigate to back to deck
+		this.props.navigation.goBack()
 	}
 	changeQuestion= (question) => {
 		this.setState(()=>({
@@ -35,6 +42,8 @@ export default class AddCard extends Component {
 		)
 	}
 }
+
+export default connect()(AddCard)
 
 const styles = StyleSheet.create({
 	container:{
