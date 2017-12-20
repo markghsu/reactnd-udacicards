@@ -10,6 +10,8 @@ import {TabNavigator,StackNavigator} from 'react-navigation'
 import DeckView from './components/DeckView'
 import AddCard from './components/AddCard'
 import AddDeck from './components/AddDeck'
+import ShowCard from './components/ShowCard'
+import Quiz from './components/Quiz'
 
 export default class App extends React.Component {
   // componentDidMount() {
@@ -21,7 +23,7 @@ export default class App extends React.Component {
   //@TODO: USE REDUX-PERSIST
   render() {
     return (
-      <Provider store={createStore(reducer,{decks:{}})}>
+        <Provider store={createStore(reducer,{decks:{}})}>
         <View style={styles.container}>
           <UStatusBar backgroundColor={orange} barStyle='light-content'/>
           <Stack />
@@ -68,8 +70,8 @@ const Stack = StackNavigator({
   AddCard: {
     screen: AddCard
   },
-  QuizView: {
-    screen: DeckView
+  Quiz: {
+    screen: Quiz
   }
 })
 
